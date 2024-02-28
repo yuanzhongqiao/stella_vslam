@@ -1,119 +1,100 @@
-# stella_vslam
-
-[![CI](https://github.com/stella-cv/stella_vslam/actions/workflows/main.yml/badge.svg)](https://github.com/stella-cv/stella_vslam/actions/workflows/main.yml)
-[![Documentation Status](https://readthedocs.org/projects/stella-cv/badge/?version=latest)](https://stella-cv.readthedocs.io/en/latest/?badge=latest)
-[![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
-
----
-
-> *NOTE:* This is a community fork of [xdspacelab/openvslam](https://github.com/xdspacelab/openvslam). It was created to continue active development of OpenVSLAM on Jan 31, 2021. The original repository is no longer available. Please read the [official statement of termination](https://github.com/xdspacelab/openvslam/wiki/Termination-of-the-release) carefully and understand it before using this. The similarities with ORB_SLAM2 in the original version have been removed by [#252](https://github.com/stella-cv/stella_vslam/pull/252). If you find any other issues with the license, please point them out. See [#37](https://github.com/stella-cv/stella_vslam/issues/37) and [#249](https://github.com/stella-cv/stella_vslam/issues/249) for discussion so far.
-
-*Versions earlier than 0.3 are deprecated. If you use them, please use them as a derivative of ORB_SLAM2 under the GPL license.*
-
----
-
-## Overview
-
-[<img src="https://raw.githubusercontent.com/stella-cv/docs/main/docs/img/teaser.png" width="640px">](https://arxiv.org/abs/1910.01122)
-
-<img src="https://j.gifs.com/81m1QL.gif" width="640px">
-
-[**[PrePrint]**](https://arxiv.org/abs/1910.01122)
-
-stella_vslam is a monocular, stereo, and RGBD visual SLAM system.
-
-### Features
-
-The notable features are:
-
-- It is compatible with **various type of camera models** and can be easily customized for other camera models.
-- Created maps can be **stored and loaded**, then stella_vslam can **localize new images** based on the prebuilt maps.
-- The system is fully modular. It is designed by encapsulating several functions in separated components with easy-to-understand APIs.
-- We provided **some code snippets** to understand the core functionalities of this system.
-
-One of the noteworthy features of stella_vslam is that the system can deal with various type of camera models, such as perspective, fisheye, and equirectangular.
-If needed, users can implement extra camera models (e.g. dual fisheye, catadioptric) with ease.
-For example, visual SLAM algorithm using **equirectangular camera models** (e.g. RICOH THETA series, insta360 series, etc) is shown above.
-
-We provided [documentation](https://stella-cv.readthedocs.io/) for installation and tutorial.
-The repository for the ROS wrapper is [stella_vslam_ros](https://github.com/stella-cv/stella_vslam_ros).
-
-### Acknowledgements
-
-OpenVSLAM is based on an indirect SLAM algorithm with sparse features, such as [ORB-SLAM](https://arxiv.org/abs/1502.00956)/[ORB-SLAM2](https://arxiv.org/abs/1610.06475), [ProSLAM](https://arxiv.org/abs/1709.04377), and [UcoSLAM](https://arxiv.org/abs/1902.03729).
-The core architecture is based on ORB-SLAM/ORB-SLAM2 and the code has been redesigned and written from scratch to improve scalability, readability, performance, etc.
-UcoSLAM has implemented the parallelization of feature extraction, map storage and loading earlier.
-ProSLAM has implemented a highly modular and easily understood system earlier.
-
-### Examples
-
-Some code snippets to understand the core functionalities of the system are provided.
-You can employ these snippets for in your own programs.
-Please see the `*.cc` files in `./example` directory or check [Simple Tutorial](https://stella-cv.readthedocs.io/en/latest/simple_tutorial.html) and [Example](https://stella-cv.readthedocs.io/en/latest/example.html).
-
-## Installation
-
-Please see [**Installation**](https://stella-cv.readthedocs.io/en/latest/installation.html) chapter in the [documentation](https://stella-cv.readthedocs.io/).
-
-[**The instructions for Docker users**](https://stella-cv.readthedocs.io/en/latest/docker.html) are also provided.
-
-## Tutorial
-
-Please see [**Simple Tutorial**](https://stella-cv.readthedocs.io/en/latest/simple_tutorial.html) chapter in the [documentation](https://stella-cv.readthedocs.io/).
-
-A sample ORB vocabulary file can be downloaded from [here](https://github.com/stella-cv/FBoW_orb_vocab/raw/main/orb_vocab.fbow).
-Sample datasets are also provided at [here](https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4).
-
-If you would like to run visual SLAM with standard benchmarking datasets (e.g. KITTI Odometry dataset), please see [**SLAM with standard datasets**](https://stella-cv.readthedocs.io/en/latest/example.html#slam-with-standard-datasets) section in the [documentation](https://stella-cv.readthedocs.io/).
-
-## Community
-
-Please contact us via [GitHub Discussions](https://github.com/stella-cv/stella_vslam/discussions) if you have any questions or notice any bugs about the software.
-
-## Currently working on
-
-- Refactoring
-- Algorithm changes and parameter additions to improve performance
-- Add tests
-- Marker integration
-- Implementation of extra camera models
-- Python bindings
-- IMU integration
-
-The higher up the list, the higher the priority.
-Feedbacks, feature requests, and contribution are welcome!
-
-## License
-
-**2-clause BSD license** (see [LICENSE](./LICENSE))
-
-The following files are derived from third-party libraries.
-
-- `./3rd/json` : [nlohmann/json \[v3.6.1\]](https://github.com/nlohmann/json) (MIT license)
-- `./3rd/spdlog` : [gabime/spdlog \[v1.3.1\]](https://github.com/gabime/spdlog) (MIT license)
-- `./3rd/tinycolormap` : [yuki-koyama/tinycolormap](https://github.com/yuki-koyama/tinycolormap) (MIT license)
-- `./3rd/FBoW` : [stella-cv/FBoW](https://github.com/stella-cv/FBoW) (MIT license) (forked from [rmsalinas/fbow](https://github.com/rmsalinas/fbow))
-- `./src/stella_vslam/solver/essential_5pt.h` : part of [libmv/libmv](https://github.com/libmv/libmv) (MIT license)
-- `./src/stella_vslam/solver/pnp_solver.cc` : part of [laurentkneip/opengv](https://github.com/laurentkneip/opengv) (3-clause BSD license)
-- `./src/stella_vslam/feature/orb_extractor.cc` : part of [opencv/opencv](https://github.com/opencv/opencv) (3-clause BSD License)
-- `./src/stella_vslam/feature/orb_point_pairs.h` : part of [opencv/opencv](https://github.com/opencv/opencv) (3-clause BSD License)
-
-Please use `g2o` as the dynamic link library because `csparse_extension` module of `g2o` is LGPLv3+.
-
-## Authors of the original version of OpenVSLAM
-
-- Shinya Sumikura ([@shinsumicco](https://github.com/shinsumicco))
-- Mikiya Shibuya ([@MikiyaShibuya](https://github.com/MikiyaShibuya))
-- Ken Sakurada ([@kensakurada](https://github.com/kensakurada))
-
-## Citation of original version of OpenVSLAM
-
-OpenVSLAM **won first place** at **ACM Multimedia 2019 Open Source Software Competition**.
-
-If OpenVSLAM helps your research, please cite the paper for OpenVSLAM. Here is a BibTeX entry:
-
-```
-@inproceedings{openvslam2019,
+<div class="Box-sc-g0xbh4-0 bJMeLZ js-snippet-clipboard-copy-unpositioned" data-hpc="true"><article class="markdown-body entry-content container-lg" itemprop="text"><div class="markdown-heading" dir="auto"><h1 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">斯特拉_vslam</font></font></h1><a id="user-content-stella_vslam" class="anchor-element" aria-label="永久链接：stella_vslam" href="#stella_vslam"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><a href="https://github.com/stella-cv/stella_vslam/actions/workflows/main.yml"><img src="https://github.com/stella-cv/stella_vslam/actions/workflows/main.yml/badge.svg" alt="CI" style="max-width: 100%;"></a>
+<a href="https://stella-cv.readthedocs.io/en/latest/?badge=latest" rel="nofollow"><img src="https://camo.githubusercontent.com/bc5c4ce6e9da1e8b637ea2cc3b9fe3397f93d79bf701cd4107dc3f8be4ba78e3/68747470733a2f2f72656164746865646f63732e6f72672f70726f6a656374732f7374656c6c612d63762f62616467652f3f76657273696f6e3d6c6174657374" alt="文件状态" data-canonical-src="https://readthedocs.org/projects/stella-cv/badge/?version=latest" style="max-width: 100%;"></a>
+<a href="https://opensource.org/licenses/BSD-2-Clause" rel="nofollow"><img src="https://camo.githubusercontent.com/c8278c8d253561b4ed5e647a73b77a3e8a7c4da8f32241bf5860bc0e46536714/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d425344253230322d2d436c617573652d6f72616e67652e737667" alt="执照" data-canonical-src="https://img.shields.io/badge/License-BSD%202--Clause-orange.svg" style="max-width: 100%;"></a></p>
+<hr>
+<blockquote>
+<p dir="auto"><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注意：这是</font></font></em><font style="vertical-align: inherit;"></font><a href="https://github.com/xdspacelab/openvslam"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">xdspacelab/openvslam</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的社区分支</font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">它的创建是为了在 2021 年 1 月 31 日继续积极开发 OpenVSLAM。原始存储库不再可用。</font><font style="vertical-align: inherit;">请</font><font style="vertical-align: inherit;">在使用前仔细阅读并理解</font></font><a href="https://github.com/xdspacelab/openvslam/wiki/Termination-of-the-release"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">官方的终止声明。</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">与原始版本中的 ORB_SLAM2 的相似之处已被</font></font><a href="https://github.com/stella-cv/stella_vslam/pull/252" data-hovercard-type="pull_request" data-hovercard-url="/stella-cv/stella_vslam/pull/252/hovercard"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">#252</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除。</font><font style="vertical-align: inherit;">如果您发现许可证有任何其他问题，请指出。</font><font style="vertical-align: inherit;">到目前为止的讨论</font><font style="vertical-align: inherit;">请参见</font></font><a href="https://github.com/stella-cv/stella_vslam/issues/37" data-hovercard-type="issue" data-hovercard-url="/stella-cv/stella_vslam/issues/37/hovercard"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">#37</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><a href="https://github.com/stella-cv/stella_vslam/issues/249" data-hovercard-type="issue" data-hovercard-url="/stella-cv/stella_vslam/issues/249/hovercard"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">#249 。</font></font></a><font style="vertical-align: inherit;"></font></p>
+</blockquote>
+<p dir="auto"><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">0.3 之前的版本已被弃用。</font><font style="vertical-align: inherit;">如果您使用它们，请在 GPL 许可下将它们用作 ORB_SLAM2 的衍生版本。</font></font></em></p>
+<hr>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">概述</font></font></h2><a id="user-content-overview" class="anchor-element" aria-label="永久链接：概述" href="#overview"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><a href="https://arxiv.org/abs/1910.01122" rel="nofollow"><img src="https://raw.githubusercontent.com/stella-cv/docs/main/docs/img/teaser.png" width="640px" style="max-width: 100%;"></a></p>
+<p dir="auto"><animated-image data-catalyst="" style="width: 640px;"><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/b3f55ba5e31d436028e530e4c8ce3e355c69c507c84b06b701d3e9192c512601/68747470733a2f2f6a2e676966732e636f6d2f38316d31514c2e676966" data-target="animated-image.originalLink"><img src="https://camo.githubusercontent.com/b3f55ba5e31d436028e530e4c8ce3e355c69c507c84b06b701d3e9192c512601/68747470733a2f2f6a2e676966732e636f6d2f38316d31514c2e676966" data-canonical-src="https://j.gifs.com/81m1QL.gif" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage"></a>
+      <span class="AnimatedImagePlayer" data-target="animated-image.player" hidden="">
+        <a data-target="animated-image.replacedLink" class="AnimatedImagePlayer-images" href="https://camo.githubusercontent.com/b3f55ba5e31d436028e530e4c8ce3e355c69c507c84b06b701d3e9192c512601/68747470733a2f2f6a2e676966732e636f6d2f38316d31514c2e676966" target="_blank">
+          
+        <span data-target="animated-image.imageContainer">
+            <img data-target="animated-image.replacedImage" alt="68747470733a2f2f6a2e676966732e636f6d2f38316d31514c2e676966" class="AnimatedImagePlayer-animatedImage" src="https://camo.githubusercontent.com/b3f55ba5e31d436028e530e4c8ce3e355c69c507c84b06b701d3e9192c512601/68747470733a2f2f6a2e676966732e636f6d2f38316d31514c2e676966" style="display: block; opacity: 1;">
+          <canvas class="AnimatedImagePlayer-stillImage" aria-hidden="true" width="640" height="360"></canvas></span></a>
+        <button data-target="animated-image.imageButton" class="AnimatedImagePlayer-images" tabindex="-1" aria-label="Play 68747470733a2f2f6a2e676966732e636f6d2f38316d31514c2e676966" hidden=""></button>
+        <span class="AnimatedImagePlayer-controls" data-target="animated-image.controls" hidden="">
+          <button data-target="animated-image.playButton" class="AnimatedImagePlayer-button" aria-label="Play 68747470733a2f2f6a2e676966732e636f6d2f38316d31514c2e676966">
+            <svg aria-hidden="true" focusable="false" class="octicon icon-play" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 13.5427V2.45734C4 1.82607 4.69692 1.4435 5.2295 1.78241L13.9394 7.32507C14.4334 7.63943 14.4334 8.36057 13.9394 8.67493L5.2295 14.2176C4.69692 14.5565 4 14.1739 4 13.5427Z">
+            </path></svg>
+            <svg aria-hidden="true" focusable="false" class="octicon icon-pause" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="2" width="3" height="12" rx="1"></rect>
+              <rect x="9" y="2" width="3" height="12" rx="1"></rect>
+            </svg>
+          </button>
+          <a data-target="animated-image.openButton" aria-label="Open 68747470733a2f2f6a2e676966732e636f6d2f38316d31514c2e676966 in new window" class="AnimatedImagePlayer-button" href="https://camo.githubusercontent.com/b3f55ba5e31d436028e530e4c8ce3e355c69c507c84b06b701d3e9192c512601/68747470733a2f2f6a2e676966732e636f6d2f38316d31514c2e676966" target="_blank">
+            <svg aria-hidden="true" class="octicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+              <path fill-rule="evenodd" d="M10.604 1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.75.75 0 01-1.06-1.06l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1zM3.75 2A1.75 1.75 0 002 3.75v8.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 12.25v-3.5a.75.75 0 00-1.5 0v3.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-8.5a.25.25 0 01.25-.25h3.5a.75.75 0 000-1.5h-3.5z"></path>
+            </svg>
+          </a>
+        </span>
+      </span></animated-image></p>
+<p dir="auto"><a href="https://arxiv.org/abs/1910.01122" rel="nofollow"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">[预印本]</font></font></strong></a></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">stella_vslam 是一个单目、立体、RGBD 视觉 SLAM 系统。</font></font></p>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">特征</font></font></h3><a id="user-content-features" class="anchor-element" aria-label="永久链接：特点" href="#features"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">显着的特点是：</font></font></p>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">它兼容</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">各种类型的相机型号</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，并且可以轻松定制为其他相机型号。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建的地图可以</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">存储和加载</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，然后stella_vslam可以</font><font style="vertical-align: inherit;">根据预先构建的地图</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">本地化新图像。</font></font></strong><font style="vertical-align: inherit;"></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该系统是完全模块化的。</font><font style="vertical-align: inherit;">它的设计是通过使用易于理解的 API 将多个功能封装在单独的组件中。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我们提供了</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">一些代码片段</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">来了解该系统的核心功能。</font></font></li>
+</ul>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">stella_vslam 值得注意的功能之一是该系统可以处理各种类型的相机模型，例如透视、鱼眼和等距柱状相机。</font><font style="vertical-align: inherit;">如果需要，用户可以轻松实现额外的相机模型（例如双鱼眼、折反射）。</font><font style="vertical-align: inherit;">例如，使用</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">等距柱状相机模型</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（例如RICOH THETA系列、insta360系列等）的视觉SLAM算法如上所示。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我们提供了</font><font style="vertical-align: inherit;">安装</font></font><a href="https://stella-cv.readthedocs.io/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文档和教程。</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ROS 包装器的存储库是</font></font><a href="https://github.com/stella-cv/stella_vslam_ros"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">stella_vslam_ros</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">致谢</font></font></h3><a id="user-content-acknowledgements" class="anchor-element" aria-label="永久链接：致谢" href="#acknowledgements"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OpenVSLAM 基于具有稀疏特征的间接 SLAM 算法，例如</font></font><a href="https://arxiv.org/abs/1502.00956" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ORB-SLAM</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> / </font></font><a href="https://arxiv.org/abs/1610.06475" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ORB-SLAM2</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">、</font></font><a href="https://arxiv.org/abs/1709.04377" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ProSLAM</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><a href="https://arxiv.org/abs/1902.03729" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">UcoSLAM</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">核心架构基于ORB-SLAM/ORB-SLAM2，代码从头开始重新设计和编写，以提高可扩展性、可读性、性能等。UcoSLAM更早地实现了特征提取、地图存储和加载的并行化。</font><font style="vertical-align: inherit;">ProSLAM较早实现了高度模块化且易于理解的系统。</font></font></p>
+<div class="markdown-heading" dir="auto"><h3 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">例子</font></font></h3><a id="user-content-examples" class="anchor-element" aria-label="永久链接：示例" href="#examples"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">提供了一些用于理解系统核心功能的代码片段。</font><font style="vertical-align: inherit;">您可以在自己的程序中使用这些片段。</font><font style="vertical-align: inherit;">请查看目录</font></font><code>*.cc</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">中的文件</font></font><code>./example</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">或查看</font></font><a href="https://stella-cv.readthedocs.io/en/latest/simple_tutorial.html" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简单教程</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><a href="https://stella-cv.readthedocs.io/en/latest/example.html" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">示例</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装</font></font></h2><a id="user-content-installation" class="anchor-element" aria-label="永久链接：安装" href="#installation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请参阅</font><a href="https://stella-cv.readthedocs.io/" rel="nofollow"><font style="vertical-align: inherit;">文档中的</font></a></font><a href="https://stella-cv.readthedocs.io/en/latest/installation.html" rel="nofollow"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装</font></font></strong></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">章节</font><font style="vertical-align: inherit;">。</font></font><a href="https://stella-cv.readthedocs.io/" rel="nofollow"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font></p>
+<p dir="auto"><a href="https://stella-cv.readthedocs.io/en/latest/docker.html" rel="nofollow"><strong><font style="vertical-align: inherit;"></font></strong></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">还提供了</font><a href="https://stella-cv.readthedocs.io/en/latest/docker.html" rel="nofollow"><strong><font style="vertical-align: inherit;">针对 Docker 用户的说明。</font></strong></a></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">教程</font></font></h2><a id="user-content-tutorial" class="anchor-element" aria-label="永久链接：教程" href="#tutorial"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请参阅</font><a href="https://stella-cv.readthedocs.io/" rel="nofollow"><font style="vertical-align: inherit;">文档中的</font></a></font><a href="https://stella-cv.readthedocs.io/en/latest/simple_tutorial.html" rel="nofollow"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">简单教程</font></font></strong></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">章节</font><font style="vertical-align: inherit;">。</font></font><a href="https://stella-cv.readthedocs.io/" rel="nofollow"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"></font><a href="https://github.com/stella-cv/FBoW_orb_vocab/raw/main/orb_vocab.fbow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">可以从此处</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下载示例 ORB 词汇表文件</font><font style="vertical-align: inherit;">。</font></font><a href="https://drive.google.com/open?id=1A_gq8LYuENePhNHsuscLZQPhbJJwzAq4" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此处</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">还提供了示例数据集</font><font style="vertical-align: inherit;">。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您想使用标准基准数据集（例如 KITTI Odometry 数据集）运行视觉 SLAM，请参阅</font><a href="https://stella-cv.readthedocs.io/" rel="nofollow"><font style="vertical-align: inherit;">文档中的</font></a></font><a href="https://stella-cv.readthedocs.io/en/latest/example.html#slam-with-standard-datasets" rel="nofollow"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用标准数据集的 SLAM</font></font></strong></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">部分</font><font style="vertical-align: inherit;">。</font></font><a href="https://stella-cv.readthedocs.io/" rel="nofollow"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">社区</font></font></h2><a id="user-content-community" class="anchor-element" aria-label="永久链接：社区" href="#community"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您有任何疑问或发现有关软件的任何错误，请通过</font></font><a href="https://github.com/stella-cv/stella_vslam/discussions"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GitHub 讨论</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">联系我们。</font></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">目前正在致力于</font></font></h2><a id="user-content-currently-working-on" class="anchor-element" aria-label="固定链接：目前正在研究中" href="#currently-working-on"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">重构</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">算法更改和参数添加以提高性能</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">添加测试</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标记整合</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">额外相机模型的实现</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Python 绑定</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">IMU集成</font></font></li>
+</ul>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">列表的位置越高，优先级越高。</font><font style="vertical-align: inherit;">欢迎提供反馈、功能请求和贡献！</font></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">执照</font></font></h2><a id="user-content-license" class="anchor-element" aria-label="永久链接：许可证" href="#license"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2 条款 BSD 许可证</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（请参阅</font></font><a href="/stella-cv/stella_vslam/blob/main/LICENSE"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">许可证</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">以下文件来自第三方库。</font></font></p>
+<ul dir="auto">
+<li><code>./3rd/json</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：</font></font><a href="https://github.com/nlohmann/json"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">nlohmann/json [v3.6.1]</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（MIT 许可证）</font></font></li>
+<li><code>./3rd/spdlog</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：</font></font><a href="https://github.com/gabime/spdlog"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">gabime/spdlog [v1.3.1]</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（MIT 许可证）</font></font></li>
+<li><code>./3rd/tinycolormap</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：</font></font><a href="https://github.com/yuki-koyama/tinycolormap"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">yuki-koyama/tinycolormap</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（麻省理工学院许可证）</font></font></li>
+<li><code>./3rd/FBoW</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：</font></font><a href="https://github.com/stella-cv/FBoW"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">stella-cv/FBoW</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（MIT 许可证）（从</font></font><a href="https://github.com/rmsalinas/fbow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">rmsalinas/fbow</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">分叉）</font></font></li>
+<li><code>./src/stella_vslam/solver/essential_5pt.h</code><font style="vertical-align: inherit;"></font><a href="https://github.com/libmv/libmv"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">： libmv/libmv</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的一部分</font><font style="vertical-align: inherit;">（MIT 许可证）</font></font></li>
+<li><code>./src/stella_vslam/solver/pnp_solver.cc</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：</font></font><a href="https://github.com/laurentkneip/opengv"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">laurentkneip/opengv</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的一部分（3 条款 BSD 许可证）</font></font></li>
+<li><code>./src/stella_vslam/feature/orb_extractor.cc</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：</font></font><a href="https://github.com/opencv/opencv"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">opencv/opencv</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的一部分（3 条款 BSD 许可证）</font></font></li>
+<li><code>./src/stella_vslam/feature/orb_point_pairs.h</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：</font></font><a href="https://github.com/opencv/opencv"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">opencv/opencv</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的一部分（3 条款 BSD 许可证）</font></font></li>
+</ul>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请使用</font></font><code>g2o</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">动态链接库，因为</font></font><code>csparse_extension</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">模块</font></font><code>g2o</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是LGPLv3+。</font></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OpenVSLAM 原始版本的作者</font></font></h2><a id="user-content-authors-of-the-original-version-of-openvslam" class="anchor-element" aria-label="永久链接：OpenVSLAM 原始版本的作者" href="#authors-of-the-original-version-of-openvslam"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Shinya Sumikura（</font></font><a href="https://github.com/shinsumicco"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@shinsumicco</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">涩谷干也 ( </font></font><a href="https://github.com/MikiyaShibuya"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@MikiyaShibuya</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> )</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">樱田健（</font></font><a href="https://github.com/kensakurada"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@kensakurada</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）</font></font></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OpenVSLAM原版引用</font></font></h2><a id="user-content-citation-of-original-version-of-openvslam" class="anchor-element" aria-label="永久链接：OpenVSLAM原始版本的引用" href="#citation-of-original-version-of-openvslam"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OpenVSLAM</font><font style="vertical-align: inherit;">荣获</font><strong><font style="vertical-align: inherit;">ACM Multimedia 2019 开源软件大赛</font></strong></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">第一名</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font><strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果 OpenVSLAM 对您的研究有帮助，请引用 OpenVSLAM 的论文。</font><font style="vertical-align: inherit;">这是 BibTeX 条目：</font></font></p>
+<div class="snippet-clipboard-content notranslate position-relative overflow-auto"><pre class="notranslate"><code>@inproceedings{openvslam2019,
   author = {Sumikura, Shinya and Shibuya, Mikiya and Sakurada, Ken},
   title = {{OpenVSLAM: A Versatile Visual SLAM Framework}},
   booktitle = {Proceedings of the 27th ACM International Conference on Multimedia},
@@ -129,16 +110,40 @@ If OpenVSLAM helps your research, please cite the paper for OpenVSLAM. Here is a
   publisher = {ACM},
   address = {New York, NY, USA}
 }
-```
-
-The preprint can be found [here](https://arxiv.org/abs/1910.01122).
-
-## Reference
-
-- Raúl Mur-Artal, J. M. M. Montiel, and Juan D. Tardós. 2015. ORB-SLAM: a Versatile and Accurate Monocular SLAM System. IEEE Transactions on Robotics 31, 5 (2015), 1147–1163.
-- Raúl Mur-Artal and Juan D. Tardós. 2017. ORB-SLAM2: an Open-Source SLAM System for Monocular, Stereo and RGB-D Cameras. IEEE Transactions on Robotics 33, 5 (2017), 1255–1262.
-- Dominik Schlegel, Mirco Colosi, and Giorgio Grisetti. 2018. ProSLAM: Graph SLAM from a Programmer’s Perspective. In Proceedings of IEEE International Conference on Robotics and Automation (ICRA). 1–9.
-- Rafael Muñoz-Salinas and Rafael Medina Carnicer. 2019. UcoSLAM: Simultaneous Localization and Mapping by Fusion of KeyPoints and Squared Planar Markers. arXiv:1902.03729.
-- Mapillary AB. 2019. OpenSfM. <https://github.com/mapillary/OpenSfM>.
-- Giorgio Grisetti, Rainer Kümmerle, Cyrill Stachniss, and Wolfram Burgard. 2010. A Tutorial on Graph-Based SLAM. IEEE Transactions on Intelligent Transportation SystemsMagazine 2, 4 (2010), 31–43.
-- Rainer Kümmerle, Giorgio Grisetti, Hauke Strasdat, Kurt Konolige, and Wolfram Burgard. 2011. g2o: A general framework for graph optimization. In Proceedings of IEEE International Conference on Robotics and Automation (ICRA). 3607–3613.
+</code></pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="@inproceedings{openvslam2019,
+  author = {Sumikura, Shinya and Shibuya, Mikiya and Sakurada, Ken},
+  title = {{OpenVSLAM: A Versatile Visual SLAM Framework}},
+  booktitle = {Proceedings of the 27th ACM International Conference on Multimedia},
+  series = {MM '19},
+  year = {2019},
+  isbn = {978-1-4503-6889-6},
+  location = {Nice, France},
+  pages = {2292--2295},
+  numpages = {4},
+  url = {http://doi.acm.org/10.1145/3343031.3350539},
+  doi = {10.1145/3343031.3350539},
+  acmid = {3350539},
+  publisher = {ACM},
+  address = {New York, NY, USA}
+}" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"></font><a href="https://arxiv.org/abs/1910.01122" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">预印本可以在这里</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">找到</font><font style="vertical-align: inherit;">。</font></font></p>
+<div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">参考</font></font></h2><a id="user-content-reference" class="anchor-element" aria-label="永久链接：参考" href="#reference"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">劳尔·穆尔-阿塔尔、JMM 蒙蒂尔和胡安·D·塔多斯。</font><font style="vertical-align: inherit;">2015. ORB-SLAM：多功能且精确的单目 SLAM 系统。</font><font style="vertical-align: inherit;">IEEE 机器人学报 31, 5 (2015), 1147–1163。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">劳尔·穆尔-阿塔尔和胡安·D·塔多斯。</font><font style="vertical-align: inherit;">2017. ORB-SLAM2：用于单目、立体和 RGB-D 相机的开源 SLAM 系统。</font><font style="vertical-align: inherit;">IEEE 机器人学报 33, 5 (2017), 1255–1262。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">多米尼克·施莱格尔、米尔科·科洛西和乔治·格里塞蒂。</font><font style="vertical-align: inherit;">2018.ProSLAM：从程序员的角度看图 SLAM。</font><font style="vertical-align: inherit;">IEEE 国际机器人与自动化会议 (ICRA) 论文集。</font><font style="vertical-align: inherit;">1-9。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">拉斐尔·穆尼奥斯·萨利纳斯和拉斐尔·梅迪纳·卡尼瑟。</font><font style="vertical-align: inherit;">2019.UcoSLAM：通过融合关键点和平方平面标记进行同步定位和建图。</font><font style="vertical-align: inherit;">arXiv：1902.03729。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">梅皮拉里AB. </font><font style="vertical-align: inherit;">2019.OpenSfM。</font></font><a href="https://github.com/mapillary/OpenSfM"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">https://github.com/mapillary/OpenSfM</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">乔治·格里塞蒂、赖纳·库梅尔、西里尔·斯塔尼斯和沃尔弗拉姆·布尔加德。</font><font style="vertical-align: inherit;">2010.基于图的SLAM教程。</font><font style="vertical-align: inherit;">IEEE 智能交通系统汇刊杂志 2, 4 (2010), 31–43。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Rainer Kümmerle、Giorgio Grisetti、Hauke Strasdat、Kurt Konolige 和 Wolfram Burgard。</font><font style="vertical-align: inherit;">2011. g2o：图优化的通用框架。</font><font style="vertical-align: inherit;">IEEE 国际机器人与自动化会议 (ICRA) 论文集。</font><font style="vertical-align: inherit;">3607–3613。</font></font></li>
+</ul>
+</article></div>
